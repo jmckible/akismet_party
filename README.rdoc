@@ -10,12 +10,11 @@ You can add Akismet to any class by including the module
 
   class Comment
     include Akismet
-    attr_accessor :comment_author
   end
   
-By including the Akismet module, all instance variables of that class get an is_spam? method.  is_spam? returns a boolean or raise an exception in the case you've misconfigured something.
+By including the Akismet module, all instance variables of that class get an +is_spam?+ method.  +is_spam?+ returns a boolean or raises an exception in the case you've misconfigured something.
 
-When is_spam? is called, the object will be inspected for the following attributes:
+When +is_spam?+ is called, the object will be inspected for the following attributes:
 
   user_ip (required)
   user_agent (required)
@@ -26,11 +25,11 @@ When is_spam? is called, the object will be inspected for the following attribut
   comment_author_url
   comment_content
   
-Refer to [http://akismet.com/development/api/] for more information about the parameters.
+Refer to {Akismet Development API}[http://akismet.com/development/api/] for more information about the parameters.
 
 For example:
 
-  >> comment = Comment.new :comment_author=>'viagra-test-123'
-  => #<Comment:0x1015286e8 @comment_author='viagra-test-123'>
+  >> comment = Comment.new :author=>'viagra-test-123'
+  => #<Comment:0x1015286e8 @author='viagra-test-123'>
   >> comment.is_spam?
   => true
