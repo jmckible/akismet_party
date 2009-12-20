@@ -1,6 +1,12 @@
 require 'httparty'
 
-class Akismet
+module Akismet
+  def is_spam?
+    AkismetParty.is_spam? self
+  end
+end
+
+class AkismetParty
   include HTTParty
   headers 'User-Agent'   =>'akismet_party/0.0.1 | Akismet/1.1', 
           'Content-Type' =>'application/x-www-form-urlencoded'  
@@ -22,9 +28,15 @@ class Akismet
       end
     end
     
-    def is_spam?
+    def is_spam?(object)
       raise 'Invalid API Key' unless @@key_validated == true
-      spam = self.post '/1.1/comment-check', :body=>{:comment_author=>'viagra-test-123', :blog=>@@blog, :user_ip=>'127.0.0.1', :user_agent=>'akismet_party/0.0.1 | Akismet/1.1'}
+      body = {:blog=>@@blog, :user_ip=>'127.0.0.1', :user_agent=>'akismet_party/0.0.1 | Akismet/1.1'}
+      
+      [:comment_author].each do |attribute|
+        body[attribute] = object.__send__(attribute) if object.respond_to?(attribute)
+      end
+      
+      spam = self.post '/1.1/comment-check', :body=>body
       
       if spam == 'true'
         true
@@ -34,7 +46,6 @@ class Akismet
         raise spam # Missing params or somesuch
       end
     end
-    
   end
  
 end
