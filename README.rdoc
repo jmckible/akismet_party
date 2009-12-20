@@ -4,5 +4,5 @@ akismet_party is a wrapper for the {Akismet}[http://www.akismet.com] spam servic
 
 First, authorize with your API key
 
-  Akismet.authorize 'yourapikey', 'your url'
+  Akismet.authorize 'your url', 'yourapikey'
   

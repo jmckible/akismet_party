@@ -8,9 +8,9 @@ class Akismet
   class << self
     attr_accessor :key_validated, :key, :blog
     
-    def authorize(key, blog, url='rest.akismet.com')
-      @@key  = key
+    def authorize(blog, key, url='rest.akismet.com')
       @@blog = blog
+      @@key  = key
       @@url  = url
       default_options[:base_uri] = "http://#{@@url}"
       valid = self.post '/1.1/verify-key', :body=>{:key=>@@key, :blog=>@@blog}
