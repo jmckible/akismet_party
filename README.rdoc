@@ -12,9 +12,9 @@ You can add Akismet to any class by including the module
     include Akismet
   end
   
-By including the Akismet module, all instance variables of that class get an +is_spam?+ method.  +is_spam?+ returns a boolean or raises an exception in the case you've misconfigured something.
+By including the Akismet module, all instance variables of that class get an is_spam? method.  is_spam? returns a boolean or raises an exception in the case you've misconfigured something.
 
-When +is_spam?+ is called, the object will be inspected for the following attributes:
+When is_spam? is called, the object will be inspected for the following attributes:
 
   user_ip (required)
   user_agent (required)
