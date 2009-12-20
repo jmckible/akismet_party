@@ -30,9 +30,10 @@ class AkismetParty
     
     def is_spam?(object)
       raise 'Invalid API Key' unless @@key_validated == true
-      body = {:blog=>@@blog, :user_ip=>'127.0.0.1', :user_agent=>'akismet_party/0.0.1 | Akismet/1.1'}
+      body = {:blog=>@@blog}
       
-      [:comment_author].each do |attribute|
+      %w{user_ip user_agent referrer permalink 
+        comment_type comment_author comment_author_url comment_content}.each do |attribute|
         body[attribute] = object.__send__(attribute) if object.respond_to?(attribute)
       end
       
