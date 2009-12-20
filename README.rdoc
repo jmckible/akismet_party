@@ -1,0 +1,8 @@
+= akismet_party
+
+akismet_party is a wrapper for the {Akismet}[http://www.akismet.com] spam service. It uses John Nunemaker's {HTTParty}[http://github.com/jnunemaker/httparty].
+
+First, authorize with your API key
+
+  Akismet.authorize 'yourapikey', 'your url'
+  
